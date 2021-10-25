@@ -2,18 +2,18 @@ import 'dart:io';
 
 Future<void> main() async {
   const basePath = './lib';
-  var screenCount = 1000;
+  var screenCount = 300;
+  var screensPath = '$basePath/screens';
+  await Directory(screensPath).delete(recursive: true);
+  await Directory(screensPath).create();
+
   for (var i = 0; i < screenCount; i++) {
-    var fileScreenPath = '$basePath/screens/screen$i';
+    var fileScreenPath = '$screensPath/screen$i';
     await Directory(fileScreenPath).create(recursive: true);
     var fileScreenName = '$fileScreenPath/screen$i.dart';
     var fileScreen = File(fileScreenName);
     fileScreen.create(recursive: true);
     fileScreen.writeAsString(buildScreen(i, (i + 1) % screenCount));
-    var fileScreenPilotName = '$fileScreenPath/screen${i}_pilot.dart';
-    var fileScreenPilot = File(fileScreenPilotName);
-    fileScreenPilot.create(recursive: true);
-    fileScreenPilot.writeAsString(buildScreenPilot(i));
   }
   var fileName = '$basePath/app_router.dart';
   var file = File(fileName);
@@ -23,38 +23,25 @@ Future<void> main() async {
 
 String buildScreen(int current, int next) {
   return """
-import 'package:build_time_app/screens/screen${next}/screen${next}_pilot.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:build_time_app/models/model0.dart';
+import 'package:build_time_app/models/model0/model0.dart';
+import 'package:build_time_app/app_router.gr.dart';
 
 class Screen$current extends StatelessWidget {
-  final String args;
-  final Model0 model;
-  final Screen${next}Pilot pilot;
+  final Model0 model0;
 
-  Screen$current({Key? key, required this.args, required this.model, Screen${next}Pilot? pilot})
-      : pilot = pilot ?? Screen${next}Pilot(),
-        super(key: key);
+  Screen$current({Key? key, required this.model0})
+      : super(key: key);
   
   @override
   Widget build(BuildContext context) {
-    return TextButton(onPressed: () => pilot.showScreen(context, args: args, model: model), child: Text('Screen${next}'));
+    return TextButton(onPressed: () => showScreen(context, model0: model0), child: const Text('Screen${next}'));
   }
-}
-  """;
-}
 
-String buildScreenPilot(int num) {
-  return """
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:build_time_app/app_router.gr.dart';
-import 'package:build_time_app/models/model0.dart';
-
-class Screen${num}Pilot {
-  Future<dynamic> showScreen(BuildContext context, {required String args, required Model0 model}) async {
+  Future<dynamic> showScreen(BuildContext context, {required Model0 model0}) async {
     return context.router.push(
-      Screen${num}Route(args: args, model: model),
+      Screen${next}Route(model0: model0),
     );
   }
 }

@@ -1,19 +1,23 @@
-import 'package:build_time_app/screens/screen149/screen149_pilot.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:build_time_app/models/model0.dart';
+import 'package:build_time_app/models/model0/model0.dart';
+import 'package:build_time_app/app_router.gr.dart';
 
 class Screen148 extends StatelessWidget {
-  final String args;
-  final Model0 model;
-  final Screen149Pilot pilot;
+  final Model0 model0;
 
-  Screen148({Key? key, required this.args, required this.model, Screen149Pilot? pilot})
-      : pilot = pilot ?? Screen149Pilot(),
-        super(key: key);
+  Screen148({Key? key, required this.model0})
+      : super(key: key);
   
   @override
   Widget build(BuildContext context) {
-    return TextButton(onPressed: () => pilot.showScreen(context, args: args, model: model), child: Text('Screen149'));
+    return TextButton(onPressed: () => showScreen(context, model0: model0), child: const Text('Screen149'));
+  }
+
+  Future<dynamic> showScreen(BuildContext context, {required Model0 model0}) async {
+    return context.router.push(
+      Screen149Route(model0: model0),
+    );
   }
 }
   
