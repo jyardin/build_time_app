@@ -43,20 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  base58check:
-    dependency: transitive
-    description:
-      name: base58check
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
-  bech32:
-    dependency: transitive
-    description:
-      name: bech32
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -169,13 +155,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
-  common_sdk_dependencies:
-    dependency: transitive
-    description:
-      path: "../invictus-root/invictus-bff/sdk/dart/common_sdk_dependencies"
-      relative: true
-    source: path
-    version: "0.0.1"
   convert:
     dependency: transitive
     description:
@@ -197,34 +176,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
-  dio:
-    dependency: transitive
-    description:
-      name: dio
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.0.1"
-  dio_http2_adapter:
-    dependency: transitive
-    description:
-      name: dio_http2_adapter
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
-  effective_dart:
-    dependency: "direct dev"
-    description:
-      name: effective_dart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.3.2"
-  equatable:
-    dependency: transitive
-    description:
-      name: equatable
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.3"
   fake_async:
     dependency: transitive
     description:
@@ -251,13 +202,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_multi_formatter:
-    dependency: "direct main"
-    description:
-      name: flutter_multi_formatter
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.4.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -291,13 +235,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  http2:
-    dependency: transitive
-    description:
-      name: http2
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   http_multi_server:
     dependency: transitive
     description:
@@ -312,13 +249,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
-  intl:
-    dependency: transitive
-    description:
-      name: intl
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.17.0"
   io:
     dependency: transitive
     description:
@@ -340,13 +270,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.1"
-  logger:
-    dependency: transitive
-    description:
-      name: logger
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   logging:
     dependency: transitive
     description:
@@ -354,13 +277,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
-  mask_input_formatter:
-    dependency: "direct main"
-    description:
-      name: mask_input_formatter
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.3"
   matcher:
     dependency: transitive
     description:
@@ -396,13 +312,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-  pattern_formatter:
-    dependency: "direct main"
-    description:
-      name: pattern_formatter
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   pedantic:
     dependency: transitive
     description:
@@ -431,41 +340,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
-  rxdart:
-    dependency: "direct main"
-    description:
-      name: rxdart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.27.2"
-  sdk:
-    dependency: "direct main"
-    description:
-      path: "../invictus-root/invictus-bff/sdk/dart"
-      relative: true
-    source: path
-    version: "1.0.0"
-  sdk_form_control:
-    dependency: transitive
-    description:
-      path: "../invictus-root/invictus-bff/sdk/dart/form_control"
-      relative: true
-    source: path
-    version: "1.0.0"
-  sdk_model:
-    dependency: transitive
-    description:
-      path: "../invictus-root/invictus-bff/sdk/dart/model"
-      relative: true
-    source: path
-    version: "1.0.0"
-  sealed_unions:
-    dependency: "direct main"
-    description:
-      name: sealed_unions
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.3+1"
   shelf:
     dependency: transitive
     description:
@@ -555,13 +429,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0"
-  uuid:
-    dependency: transitive
-    description:
-      name: uuid
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.5"
   vector_math:
     dependency: transitive
     description:

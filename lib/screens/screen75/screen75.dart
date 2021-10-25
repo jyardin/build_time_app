@@ -1,19 +1,19 @@
 import 'package:build_time_app/screens/screen76/screen76_pilot.dart';
 import 'package:flutter/material.dart';
-import 'package:sdk/sdk_models.dart';
+import 'package:build_time_app/models/model0.dart';
 
 class Screen75 extends StatelessWidget {
   final String args;
-  final DisplayAccount account;
+  final Model0 model;
   final Screen76Pilot pilot;
 
-  Screen75({Key? key, required this.args, required this.account, Screen76Pilot? pilot})
+  Screen75({Key? key, required this.args, required this.model, Screen76Pilot? pilot})
       : pilot = pilot ?? Screen76Pilot(),
         super(key: key);
   
   @override
   Widget build(BuildContext context) {
-    return TextButton(onPressed: () => pilot.showScreen(context, args: args, account: account), child: Text('Screen76'));
+    return TextButton(onPressed: () => pilot.showScreen(context, args: args, model: model), child: Text('Screen76'));
   }
 }
   

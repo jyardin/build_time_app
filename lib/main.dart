@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:build_time_app/models/model0.dart';
 import 'package:flutter/material.dart';
 import 'package:build_time_app/app_router.gr.dart';
-import 'package:sdk/sdk_models.dart';
 
 void main() {
   runApp(MyApp());
@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
             path: 'screen0',
             args: Screen0RouteArgs(
               args: 'Screen',
-              account: DisplayAccount(cancelActionTitle: 'Title', snackbarWarnings: []),
+              model: Model0('name'),
             ),
           ),
         ]),
