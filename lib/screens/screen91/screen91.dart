@@ -1,22 +1,37 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:build_time_app/models/model0/model0.dart';
+import 'package:build_time_app/models/model91/model91.dart';
+import 'package:build_time_app/models/model92/model92.dart';
 import 'package:build_time_app/app_router.gr.dart';
 
 class Screen91 extends StatelessWidget {
-  final Model0 model0;
+  final Model91 model;
 
-  Screen91({Key? key, required this.model0})
+  Screen91({Key? key, required this.model})
       : super(key: key);
   
   @override
   Widget build(BuildContext context) {
-    return TextButton(onPressed: () => showScreen(context, model0: model0), child: const Text('Screen92'));
+    final currentModel = model;
+    if (false) {
+      return _buildContent(context, '');
+    }  else if (currentModel is Model91_0) {
+      return _buildContent(context, currentModel.name);
+    }  else if (currentModel is Model91_1) {
+      return _buildContent(context, currentModel.name);
+    }  else if (currentModel is Model91_2) {
+      return _buildContent(context, currentModel.name);
+    } 
+    return _buildContent(context, '');
   }
 
-  Future<dynamic> showScreen(BuildContext context, {required Model0 model0}) async {
+  Widget _buildContent(BuildContext context, String name) {
+    return  TextButton(onPressed: () => showScreen(context, model: Model92_0(name)), child: const Text('Screen92'));
+  }
+
+  Future<dynamic> showScreen(BuildContext context, {required Model92 model}) async {
     return context.router.push(
-      Screen92Route(model0: model0),
+      Screen92Route(model: model),
     );
   }
 }

@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       showPerformanceOverlay: false,
       themeMode: ThemeMode.dark,
       routerDelegate: _appRouter.delegate(initialRoutes: [
-        Screen0Route(model0: Model0('')),
+        Screen0Route(model: Model0_0('')),
       ]),
       routeInformationParser: _appRouter.defaultRouteParser(),
     );

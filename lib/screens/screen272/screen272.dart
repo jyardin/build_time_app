@@ -1,22 +1,37 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:build_time_app/models/model0/model0.dart';
+import 'package:build_time_app/models/model272/model272.dart';
+import 'package:build_time_app/models/model273/model273.dart';
 import 'package:build_time_app/app_router.gr.dart';
 
 class Screen272 extends StatelessWidget {
-  final Model0 model0;
+  final Model272 model;
 
-  Screen272({Key? key, required this.model0})
+  Screen272({Key? key, required this.model})
       : super(key: key);
   
   @override
   Widget build(BuildContext context) {
-    return TextButton(onPressed: () => showScreen(context, model0: model0), child: const Text('Screen273'));
+    final currentModel = model;
+    if (false) {
+      return _buildContent(context, '');
+    }  else if (currentModel is Model272_0) {
+      return _buildContent(context, currentModel.name);
+    }  else if (currentModel is Model272_1) {
+      return _buildContent(context, currentModel.name);
+    }  else if (currentModel is Model272_2) {
+      return _buildContent(context, currentModel.name);
+    } 
+    return _buildContent(context, '');
   }
 
-  Future<dynamic> showScreen(BuildContext context, {required Model0 model0}) async {
+  Widget _buildContent(BuildContext context, String name) {
+    return  TextButton(onPressed: () => showScreen(context, model: Model273_0(name)), child: const Text('Screen273'));
+  }
+
+  Future<dynamic> showScreen(BuildContext context, {required Model273 model}) async {
     return context.router.push(
-      Screen273Route(model0: model0),
+      Screen273Route(model: model),
     );
   }
 }
