@@ -1,22 +1,31 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:build_time_app/models/model0/model0.dart';
+import 'package:build_time_app/serializers.dart';
+import 'package:build_time_app/models/model30/model30.dart';
+import 'package:build_time_app/models/model31/model31.dart';
 import 'package:build_time_app/app_router.gr.dart';
 
 class Screen30 extends StatelessWidget {
-  final Model0 model0;
+  final Model30 model;
 
-  Screen30({Key? key, required this.model0})
+  Screen30({Key? key, required this.model})
       : super(key: key);
   
   @override
   Widget build(BuildContext context) {
-    return TextButton(onPressed: () => showScreen(context, model0: model0), child: const Text('Screen31'));
+    final serialized = serializers.serialize(model);
+    final deserialized = serializers.deserializeWith(Model30.serializer, serialized);
+    print(deserialized);
+    return _buildContent(context, '');
   }
 
-  Future<dynamic> showScreen(BuildContext context, {required Model0 model0}) async {
+  Widget _buildContent(BuildContext context, String name) {
+    return  TextButton(onPressed: () => showScreen(context, model: Model31()), child: const Text('Screen31'));
+  }
+
+  Future<dynamic> showScreen(BuildContext context, {required Model31 model}) async {
     return context.router.push(
-      Screen31Route(model0: model0),
+      Screen31Route(model: model),
     );
   }
 }
