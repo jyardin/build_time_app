@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:build_time_app/serializers.dart';
 import 'package:build_time_app/models/model64/model64.dart';
 import 'package:build_time_app/models/model65/model65.dart';
 import 'package:build_time_app/app_router.gr.dart';
@@ -12,21 +13,14 @@ class Screen64 extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    final currentModel = model;
-    if (false) {
-      return _buildContent(context, '');
-    }  else if (currentModel is Model64_0) {
-      return _buildContent(context, currentModel.name);
-    }  else if (currentModel is Model64_1) {
-      return _buildContent(context, currentModel.name);
-    }  else if (currentModel is Model64_2) {
-      return _buildContent(context, currentModel.name);
-    } 
+    final serialized = serializers.serialize(model);
+    final deserialized = serializers.deserializeWith(Model64.serializer, serialized);
+    print(deserialized);
     return _buildContent(context, '');
   }
 
   Widget _buildContent(BuildContext context, String name) {
-    return  TextButton(onPressed: () => showScreen(context, model: Model65_0(name)), child: const Text('Screen65'));
+    return  TextButton(onPressed: () => showScreen(context, model: Model65()), child: const Text('Screen65'));
   }
 
   Future<dynamic> showScreen(BuildContext context, {required Model65 model}) async {

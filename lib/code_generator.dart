@@ -2,8 +2,9 @@ import 'dart:io';
 
 Future<void> main() async {
   const basePath = './lib';
-  var screenCount = 300;
+  var screenCount = 100;
   var modelCount = 3;
+  var fieldCount = 50;
   var screensPath = '$basePath/screens';
   await Directory(screensPath).delete(recursive: true);
   await Directory(screensPath).create();
@@ -25,44 +26,56 @@ Future<void> main() async {
     var fileModelName = '$fileModelPath/model$i.dart';
     var fileModel = File(fileModelName);
     fileModel.create(recursive: true);
-    fileModel.writeAsString(buildModel(i, modelCount));
+    fileModel.writeAsString(buildModel(i, fieldCount));
   }
   var fileName = '$basePath/app_router.dart';
   var file = File(fileName);
   file.create(recursive: true);
   file.writeAsString(buildAppRouter(screenCount));
+  var serializersFileName = '$basePath/serializers.dart';
+  var serializersFile = File(serializersFileName);
+  serializersFile.create(recursive: true);
+  serializersFile.writeAsString(buildSerializers(screenCount));
 }
 
-String buildModel(int current, int modelCount) {
-  var modelsIterable = Iterable<int>.generate(modelCount);
-  var models = modelsIterable
-      .map((i) => """
-class Model${current}_$i extends Model${current} {
-  final String name;
-
-  Model${current}_$i(this.name);
-}
-""")
+String buildModel(int current, int fieldCount) {
+  var countIterable = Iterable<int>.generate(fieldCount);
+  var imports = countIterable
+      .map((i) => "import 'package:build_time_app/models/model$i/model$i.dart';\n")
       .reduce((value, element) => value + element);
+  var fields = countIterable
+      .map((i) => "@BuiltValueField(wireName: r'field$i')\nModel$i get field$i;")
+      .reduce((value, element) => "$value\n  $element");
   return """
-class Model${current} {
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
+import 'package:equatable/equatable.dart';
+$imports
+
+part 'model$current.g.dart';
+
+abstract class Model${current} implements Built<Model${current}, Model${current}Builder> {
+  static Serializer<Model${current}> get serializer => _\$model${current}Serializer;
+
+  $fields
+
+  Model${current}._();
+  factory Model${current}([void Function(Model${current}Builder) updates]) = _\$Model${current};
 }
-
-$models
-
 """;
 }
 String buildScreen(int current, int next, int modelCount) {
   
   var modelsIterable = Iterable<int>.generate(modelCount);
   var models = modelsIterable
-      .map((i) => """ else if (currentModel is Model${current}_$i) {
+      .map((i) => """if (currentModel is Model${current}_$i && currentModel != Model${current}_$i('')) {
       return _buildContent(context, currentModel.name);
     } """)
-      .reduce((value, element) => value + element);
+      .reduce((value, element) => "$value else $element");
   return """
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:build_time_app/serializers.dart';
 import 'package:build_time_app/models/model$current/model$current.dart';
 import 'package:build_time_app/models/model$next/model$next.dart';
 import 'package:build_time_app/app_router.gr.dart';
@@ -75,15 +88,14 @@ class Screen$current extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    final currentModel = model;
-    if (false) {
-      return _buildContent(context, '');
-    } $models
+    final serialized = serializers.serialize(model);
+    final deserialized = serializers.deserializeWith(Model$current.serializer, serialized);
+    print(deserialized);
     return _buildContent(context, '');
   }
 
   Widget _buildContent(BuildContext context, String name) {
-    return  TextButton(onPressed: () => showScreen(context, model: Model${next}_0(name)), child: const Text('Screen${next}'));
+    return  TextButton(onPressed: () => showScreen(context, model: Model${next}()), child: const Text('Screen${next}'));
   }
 
   Future<dynamic> showScreen(BuildContext context, {required Model$next model}) async {
@@ -114,3 +126,24 @@ $imports
 class \$AppRouter {}
   """;
 }
+
+String buildSerializers(int count) {
+  var countIterable = Iterable<int>.generate(count);
+  var imports = countIterable
+      .map((i) => "import 'package:build_time_app/models/model$i/model$i.dart';\n")
+      .reduce((value, element) => value + element);
+  var models = countIterable
+      .map((i) => "Model$i")
+      .reduce((value, element) => "$value,\n $element");
+  return """import 'package:built_value/serializer.dart';
+$imports
+
+part 'serializers.g.dart';
+
+@SerializersFor([
+  $models
+])
+Serializers serializers = _\$serializers;
+  """;
+}
+
